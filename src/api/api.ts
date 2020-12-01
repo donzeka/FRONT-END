@@ -1,5 +1,5 @@
 import axios, { AxiosRequestConfig, AxiosResponse } from 'axios';
-import { ApiConfig } from '../config/api..config';
+import { ApiConfig } from '../config/api.config';
 
 export default function api(
     path: string,
@@ -21,14 +21,14 @@ export default function api(
         axios(requestData)
         .then(res =>  responseHandler(res, resolve))
         .catch(async err => {
-            if(err.response.status === 401) {
+            if (err.response.status === 401) {
                 const newToken = await refreshToken();
                 
                 if(!newToken){
                     const response: ApiResponse = {
                         status: 'login',
                         data: null,
-                    }
+                    };
             
                     return resolve(response);
                 }
@@ -52,7 +52,7 @@ export default function api(
     
 }
 
-interface ApiResponse {
+export interface ApiResponse {
     status: 'ok' | 'error' | 'login';
     data: any;
 }
@@ -65,34 +65,25 @@ async function responseHandler(
         const response: ApiResponse = {
             status: 'error',
             data: res.data,
-        }
+        };
 
         return resolve(response);
     }
 
-    let response: ApiResponse;
-    if(res.data.statusCode < 0){
-        response = {
-            status: 'login',
-            data: null,
-        };
-    } else {
-        response = {
-            status: 'ok',
-            data: res.data,
-        };
-    }
-    resolve(response);
+    const response: ApiResponse = {
+        status: 'ok',
+        data: res.data,
+    };
 
-    //resolve(res.data);
+    return resolve(response);
 }
 
 function getToken(): string {
     const token = localStorage.getItem('api_token');
-    return 'Berer' + token;
+    return 'Berer ' + token;
 }
 
-function saveToken(token: string) {
+export function saveToken(token: string) {
     localStorage.setItem('api_token', token);
 }
 
@@ -101,7 +92,7 @@ function getRefreshToken(): string{
     return token + '';
 }
 
-function saveRefreshToken(token: string) {
+export function saveRefreshToken(token: string) {
     localStorage.setItem('api_refresh_token', token);
 }
 
@@ -117,7 +108,8 @@ async function refreshToken(): Promise <string | null> {
         baseURL: ApiConfig.API_URL,
         data: JSON.stringify(data),
         headers: {
-            'Content-Type': 'application/json'        },
+            'Content-Type': 'application/json'        
+        },
     };
 
     const rtr: { data: {token: string | undefined}} = await axios(refreshTokenRequestData);
@@ -131,7 +123,7 @@ async function refreshToken(): Promise <string | null> {
 
 async function repeatRequest(
     requestData: AxiosRequestConfig,
-     resolve: (value: ApiResponse) => void
+    resolve: (value: ApiResponse) => void
 ) {
     axios(requestData)
     .then(res => {
@@ -145,13 +137,12 @@ async function repeatRequest(
         }else {
             response = {
                 status: 'ok',
-                data: res
+                data: res.data
             };
         }
 
-        return resolve(response);
-        
-        })
+        return resolve(response);  
+    })
     .catch(err => {
         const response: ApiResponse = {
             status: 'error',
