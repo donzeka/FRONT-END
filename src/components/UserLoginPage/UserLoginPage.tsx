@@ -68,7 +68,7 @@ export class UserLoginPage extends React.Component {
                 if (res.data.statusCode !== undefined) {
                     let message = '';
                      switch (res.data.statusCode) {
-                         case -3001: message = 'Unknown e-mail!'; break;
+                         case -3001: message = 'Username does not exist!'; break;
                          case -3002: message = 'Bad password!'; break;
                      }
 

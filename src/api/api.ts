@@ -21,7 +21,8 @@ export default function api(
         axios(requestData)
         .then(res =>  responseHandler(res, resolve))
         .catch(async err => {
-            if (err.response.status === 401) {
+            //console.log(err.response.status);
+            if (err.status === 401) {
                 const newToken = await refreshToken();
                 
                 if(!newToken){
@@ -43,7 +44,7 @@ export default function api(
 
             const response: ApiResponse = {
                 status: 'error',
-                data: err
+                data: err,
             };
 
             resolve(response);
