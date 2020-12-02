@@ -13,7 +13,7 @@ interface HomePageState {
 
 interface ApiCategoryDto {
   categoryId: number;
-  name: string;
+  catName: string;
 }
 
 class HomePage extends React.Component {
@@ -52,7 +52,7 @@ class HomePage extends React.Component {
     const categories: CategoryType[] = data.map(category => {
       return {
         categoryId: category.categoryId,
-        name: category.name,
+        catName: category.catName,
         items: [],
       };
     });
@@ -100,7 +100,7 @@ class HomePage extends React.Component {
         <Card className="mb-3">
             <Card.Body>
               <Card.Title as="p">
-                { category.name }
+                { category.catName }
               </Card.Title>
               <Link to={ `/category/${ category.categoryId }`} className="btn btn-primary btn-block btn-sm">  
                 Open Category

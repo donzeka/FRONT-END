@@ -97,6 +97,11 @@ export function saveRefreshToken(token: string) {
     localStorage.setItem('api_refresh_token', token);
 }
 
+export function removeTokenData() {
+    localStorage.removeItem('api_token');
+    localStorage.removeItem('api_refresh_token');
+}
+
 async function refreshToken(): Promise <string | null> {
     const path = 'auth/user/refresh';
     const data = {

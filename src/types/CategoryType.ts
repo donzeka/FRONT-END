@@ -2,6 +2,6 @@ import ProductType from "./ProductType";
 
 export default class CategoryType {
     categoryId?: number;
-    name?: string;
+    catName?: string;
     items?: ProductType[];
 }

@@ -14,12 +14,15 @@ import { ContactPage } from './components/ContactPage/ContactPage';
 import { UserLoginPage } from './components/UserLoginPage/UserLoginPage';
 import CategoryPage from './components/CategoryPage/CategoryPage';
 import { UserRegistrationPage } from './components/UserRegistrationPage/UserRegistrationPage';
+import { UserLogoutPage } from './components/UserLogoutPage/UserLogoutPage';
 
 const menuItems = [
   new MainMenuItem("Home", "/"),
   new MainMenuItem("Contact", "/contact"),
   new MainMenuItem("Log in", "/user/login"),
   new MainMenuItem("Register", "/user/register"),
+  
+  new MainMenuItem("Log out", "/user/logout"),
 ];
 
 ReactDOM.render(
@@ -30,6 +33,7 @@ ReactDOM.render(
         <Route exact path="/" component={HomePage}/>
         <Route path="/contact" component={ContactPage}/>
         <Route path="/user/login" component={UserLoginPage}/>
+        <Route path="/user/logout" component={UserLogoutPage}/>
         <Route path="/user/register" component={UserRegistrationPage}/>
         <Route path="/category/:cId" component={CategoryPage}/>
       </Switch>

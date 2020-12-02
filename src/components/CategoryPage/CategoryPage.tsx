@@ -31,7 +31,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
                 <Card>
                     <Card.Body>
                         <Card.Title>
-                            <FontAwesomeIcon icon={faListAlt}/>  {this.state.category?.name}
+                            <FontAwesomeIcon icon={faListAlt}/>  {this.state.category?.catName}
                         </Card.Title>
 
                         <Card.Text>
@@ -58,7 +58,7 @@ export default class CategoryPage extends React.Component<CategoryPageProperties
     private getCategoryData(){
         setTimeout(() => {
             const data: CategoryType = {
-                name: 'Category' + this.props.match.params.cId,
+                catName: 'Category' + this.props.match.params.cId,
                 categoryId: this.props.match.params.cId,
                 items: []
             };
